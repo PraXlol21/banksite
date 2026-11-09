@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Edit details · MoneyBook{% endblock %}
+{% block content %}
+<section class="card">
+  <h1>Edit your details</h1>
+  <form method="post" class="form-grid">
+    {% for col, label, type in fields %}
+      <label>{{ label }}
+        <input name="{{ col }}" type="{{ type }}" value="{{ user[col] if user[col] is not none else '' }}"
+               {% if type == 'number' %}step="0.01"{% endif %}>
+      </label>
+    {% endfor %}
+    <div class="actions">
+      <button type="submit">Save</button>
+      <a href="{{ url_for('dashboard') }}">Cancel</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

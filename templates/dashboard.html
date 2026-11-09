@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="head-row">
+  <h1>Hi, {{ user.full_name or user.username }}</h1>
+  <a class="btn" href="{{ url_for('edit') }}">Edit details</a>
+</div>
+
+<section class="stats">
+  <div class="stat"><span>Balance</span><strong>{{ user.balance|money }}</strong></div>
+  <div class="stat"><span>Savings</span><strong>{{ user.savings|money }}</strong></div>
+  <div class="stat"><span>Debt</span><strong>{{ user.debt|money }}</strong></div>
+  <div class="stat accent"><span>Net worth</span><strong>{{ net_worth|money }}</strong></div>
+</section>
+
+<div class="grid2">
+  <section class="card">
+    <h2>Monthly</h2>
+    <dl>
+      <dt>Income</dt><dd>{{ user.monthly_income|money }}</dd>
+      <dt>Expenses</dt><dd>{{ user.monthly_expenses|money }}</dd>
+      <dt>Left over</dt><dd class="{{ 'neg' if left_over < 0 else 'pos' }}">{{ left_over|money }}</dd>
+    </dl>
+  </section>
+  <section class="card">
+    <h2>About you</h2>
+    <dl>
+      <dt>Username</dt><dd>{{ user.username }}</dd>
+      <dt>Email</dt><dd>{{ user.email }}</dd>
+      <dt>Phone</dt><dd>{{ user.phone }}</dd>
+      <dt>City</dt><dd>{{ user.city }}</dd>
+      <dt>Occupation</dt><dd>{{ user.occupation }}</dd>
+    </dl>
+  </section>
+</div>
+{% endblock %}
